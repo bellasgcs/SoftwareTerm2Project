@@ -1,10 +1,10 @@
-# Isabella
-# D&D Characters
+# Isabella Von Huben
+# D&D Character Creator
 
 import enum
 from DnDCharacter import *
 from DnDCharacterDatabase import *
-
+# imports data from previous python files
 
 # initialise variables
 
@@ -18,6 +18,14 @@ def createcharacter():
     background = make_decision("What is your character's background?", DnDBackground)
     align = make_decision("What is your character's alignment?", DnDAlignment)
     character = DnDCharacter(name, race, classtype, background, align)
+
+# ^ This asks the user different questions about their character during character creation
+# It also defines what a 'character' is according to the code
+
+# v Each of these match to class you selected
+# and asks the user more in depth questions specific to their class.
+# Specifically about their proficiencies, skills, weapons, and inventory
+
     match classtype:
         case DnDClass.Artificer:
             artificer_skills = [DnDSkills.Arcana, DnDSkills.History, DnDSkills.Investigation, DnDSkills.Medicine, DnDSkills.Nature, DnDSkills.Perception, DnDSkills.Sleight_of_hand]
@@ -203,6 +211,8 @@ def createcharacter():
             character.proficiencies += [skillprof1, skillprof2]
 
     return character
+# The 'return' sends all the new choices that were made, back to be viewed
+
 
 def make_string(input):
     if isinstance(input, str):
@@ -217,8 +227,12 @@ def make_string(input):
         else:
             return f"{input[0]}x {input[1]}"
 
+# ^ This takes enums and converts any '_'s to spaces to make things neater to view
+# It also adds the number of the same objects in your inventory
+# For example if there are 4 javelins, it would say '4x Javelin'
 
-# View Character by characteristics:
+
+# v This function displays each feature of the character the user designed
 def viewcharacter(character):
     if character == None:
         print("No characters to view")
@@ -233,8 +247,6 @@ def viewcharacter(character):
     print(f"Level = {character.level}")
     print(f"Hitpoints = {character.HP}")
     print(f"Proficiency Bonus = +{character.prof_bonus}")
-    print(f"Armour Class = {character.AC}")
-    print(f"Constitution = {character.con}")
     print(f'Languages = ', end='')
     print(*[make_string(language) for language in character.languages], sep=', ')
     print(f'Proficiencies = ', end='')
@@ -244,35 +256,37 @@ def viewcharacter(character):
     print(f'Weapons = ', end='')
     print(*[make_string(weapons) for weapons in character.weapons], sep=', ')
 
-# Helper function to ask questions and process answers
+
+# v This is a helper function to ask questions and process answers to make the question-asking easier
 def make_decision(question, constraints):
-    # Generate the option list
+
+    # v Generates the option list
     options = []
-    # Make sure constraints is a list
+    # v Makes sure constraints is a list
     constraints = [constraints] if not isinstance(constraints, list) else constraints
 
-    # Iterate through the constraints and generate tuples of printable names and values
+    # v Iterates through the constraints and generate tuples of printable names and values
     for i in constraints:
-        # If constraint is an Enum class we process all values
+        # If constraint is an Enum class, all values are processed
         if isinstance(i, enum.EnumType):
             options += [(make_string(j), j) for j in i]
-        # Otherwise we treat the constraint as a string
+        # Otherwise the constraint is treated as a string
         else:
             options += [(make_string(i), i)]
 
-    # Keep asking question while we don't have an acceptable answer
+    # Keeps asking question while the user doesn't have an acceptable answer
     while True:
-        # Print the question
+        # Prints the question
         print(question)
 
-        # Print the options
+        # Prints the options
         for i in range(len(options)):
             print(f"{i}: {options[i][0]}")
 
-        # Wait for input
+        # Waits for input
         answer = input()
 
-        # Validate input as per constraints
+        # Validates input as per constraints
         if answer.isdigit() and int(answer) < len(options):
             return options[int(answer)][1]
         else:
@@ -281,8 +295,8 @@ def make_decision(question, constraints):
                     return o[1]
 
 
-# Run Project
-#All data is converted to lowercase and matches the first letter of the word to allow shortcuts for the user to use.
+# Runs the project
+# All data is converted to lowercase and matches the first letter of the word to allow shortcuts for the user to use if they wish.
 if __name__ == "__main__":
     db = DnDCharacterDatabase("characters.pickle")
     while True:

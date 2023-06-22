@@ -1,5 +1,8 @@
 from enum import Enum, auto
 
+#This contains all the data required for main.py and DnDCharacter.py in the form of classes and enums
+#This is so it can be easily accessed in main.py and DnDCharacter.py
+
 #Race names
 class DnDRace(Enum):
     Dragonborn = auto()
@@ -120,9 +123,11 @@ class DnDMartialRangedWeapons(Enum):
     Longbow = auto()
     Net = auto()
 
+#Shields
 class DnDShields(Enum):
     Shield = auto()
 
+#Attributes
 class DnDAttributes(Enum):
     Strength = auto()
     Dexterity = auto()
@@ -131,6 +136,7 @@ class DnDAttributes(Enum):
     Wisdom = auto()
     Charisma = auto()
 
+#Artisan Tools
 class DnDArtisanTools(Enum):
     Alchemist_supplies = auto()
     Brewers_supplies = auto()
@@ -150,12 +156,14 @@ class DnDArtisanTools(Enum):
     Weavers_tools = auto()
     Woodcarvers_tools = auto()
 
+#Gaming Sets
 class DnDGamingSets(Enum):
     Dice_set = auto()
     Dragonchess_set = auto()
     Playing_card_set = auto()
     Three_Dragon_Ante_set = auto()
 
+#Musical Instruments
 class DnDMusicalInstruments(Enum):
     Bagpipes = auto()
     Drum = auto()
@@ -168,6 +176,7 @@ class DnDMusicalInstruments(Enum):
     Shawm = auto()
     Viol = auto()
 
+#Misc Tools
 class DnDMiscTools(Enum):
     Disguise_kit = auto()
     Forgery_kit = auto()
@@ -176,11 +185,13 @@ class DnDMiscTools(Enum):
     Poisoners_kit = auto()
     Thieves_tools = auto()
 
+#Light Armour
 class DnDLightArmour(Enum):
     Padded_armour = auto()
     Leather_armour = auto()
     Studded_leather_armour = auto()
 
+#Medium Armour
 class DnDMediumArmour(Enum):
     Hide_armour = auto()
     Chain_shirt = auto()
@@ -189,12 +200,14 @@ class DnDMediumArmour(Enum):
     Breastplate = auto()
     Halfplate = auto()
 
+#Heavy Armour
 class DnDHeavyArmour(Enum):
     Ring_mail_armour = auto()
     Chain_mail_armour = auto()
     Splint_armour = auto()
     Plate_armour = auto()
 
+#Equipment Packs
 class DnDEquipmentPacks(Enum):
     Burglars_pack = auto()
     Diplomats_pack = auto()
@@ -204,6 +217,7 @@ class DnDEquipmentPacks(Enum):
     Priests_pack = auto()
     Scholars_pack = auto()
 
+#Skills
 class DnDSkills(Enum):
     Acrobatics = auto()
     Animal_handling = auto()
@@ -224,6 +238,7 @@ class DnDSkills(Enum):
     Stealth = auto()
     Survival = auto()
 
+#Items
 class DnDItems(Enum):
     Abacus = auto()
     Bedroll = auto()
@@ -300,7 +315,7 @@ class DnDItems(Enum):
     Emblem = auto()
     Reliquary = auto()
 
-
+#Ammunition
 class DnDAmmunition(Enum):
     Arrows = auto()
     Blowgun_Needles = auto()

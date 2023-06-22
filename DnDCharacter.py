@@ -1,6 +1,7 @@
 from DnDData import *
 
-#Viewing Race
+# v This matches the first letter of the user's input to its corresponding race to allow shortcuts
+# it also converts all letters to lowercase
 def convert_to_dnd_race(race):
     if isinstance(race, DnDRace):
         return race
@@ -24,6 +25,9 @@ def convert_to_dnd_race(race):
 
             case 'e':
                 return DnDRace.Elf
+                # ^ for this one, if the user enters the letter 'e', it will assume that the user was typing 'elf'
+                # as that is the only race starting with 'e'
+                # all other races work in the same way
 
             case 'h':
                 if 'i' in race:
@@ -40,7 +44,10 @@ def convert_to_dnd_race(race):
 
     return None
 
-#Viewing Class
+# v This matches the first letter of the user's input to its corresponding class to allow shortcuts
+# it also converts all letters to lowercase
+# it works the exact same as the previous function
+
 def convert_to_dnd_class(classtype):
     if isinstance(classtype, DnDClass):
         return classtype
@@ -98,7 +105,9 @@ def convert_to_dnd_class(classtype):
 
     return None
 
-#Viewing Background
+# This matches the first letter of the user's input to the corresponding background to allow shortcuts
+# it also converts all letters to lowercase
+# it also functions the exact same way as the last two functions
 def convert_to_dnd_background(background):
     if isinstance(background, DnDBackground):
         return background
@@ -157,12 +166,15 @@ def convert_to_dnd_background(background):
 
     return None
 
+# This converts all input letters to lowercase
 def convert_to_dnd_martialweapons(weapons):
     weapons = weapons.lower()
     weapons = weapons[0].upper()
     return weapons
 
-#Viewing Alignment
+# This matches the acronym to corresponding background to allow shortcuts
+# it also converts all letters to lowercase
+# it also functions the exact same way as the first two functions
 def convert_to_dnd_alignment(alignment):
     if isinstance(alignment, DnDAlignment):
         return alignment
@@ -207,7 +219,7 @@ def convert_to_dnd_alignment(alignment):
     return None
 
 
-# Character Core
+# v This defines what a 'DnDCharacter' is and the different parts of it such as its race and level
 class DnDCharacter:
     def __init__(
         self, name: str, race: DnDRace, classtype: DnDClass, background, align: DnDAlignment
@@ -216,27 +228,24 @@ class DnDCharacter:
         self.race = race
         self.level = 1
         self.HP = 1
-        self.AC = 0
         self.languages = []
         self.proficiencies = []
         self.inventory = []
         self.weapons = []
         self.classtype = None
         self.set_class(classtype)
-        self.con = 2
         self.background = background
         self.align = align
         self.set_race(race)
 
-    # Delete Character:
+    # This makes it so that if the user resets their character,
+    # all features will display 'N/A' if they try to view their character without making one
     def reset(self):
         self.race = "N/A"
         self.classtype = "N/A"
         self.name = "N/A"
         self.level = "N/A"
         self.HP = "N/A"
-        self.AC = "N/A"
-        self.con = "N/A"
         self.background = "N/A"
         self.align = "N/A"
         self.size = "N/A"
@@ -246,7 +255,8 @@ class DnDCharacter:
         self.inventory = "N/A"
         self.weapons = "N/A"
 
-    # Class Conditions
+    # This function contains a bunch of conditions for each class
+    # it sets the characters HP, proficiency bonus, and proficiencies based on the character's class
     def set_class(self, classtype: DnDClass):
         if not isinstance(classtype, DnDClass):
             raise ValueError("Class is not a DnDClass")
@@ -255,7 +265,8 @@ class DnDCharacter:
         self.classtype = classtype
         match classtype:
 
-            #Barbarian Conditions
+            #For example, if the user chooses 'barbarian', the HP is set to 12, the proficiency bonus is set to 2,
+            #and the character receives all the barbarian proficiencies
             case DnDClass.Barbarian:
                 self.HP = 12
                 self.prof_bonus = 2
@@ -348,7 +359,9 @@ class DnDCharacter:
                 self.prof_bonus = 2
                 self.proficiencies += [DnDSimpleWeapons.Dagger, DnDSimpleRangedWeapons.Dart, DnDSimpleRangedWeapons.Sling, DnDSimpleWeapons.Quarterstaff, DnDSimpleRangedWeapons.Light_crossbow, DnDAttributes.Intelligence, DnDAttributes.Wisdom]
 
-    #Race Conditions
+    # This function contains a bunch of conditions for each race, like the last function
+    # it sets the characters speed, size, and languages they know, based on their race
+    # it works like the last function
     def set_race(self, race: DnDRace):
         match race:
 
@@ -358,7 +371,8 @@ class DnDCharacter:
                 self.size = 'Medium'
                 self.languages += [DnDLanguages.Common, DnDLanguages.Infernal]
 
-            #Half Orc Conditions
+            #For example, if the user selects 'half orc', there character has a speed of 30ft, a size of medium,
+            #and can speak common and orc
             case DnDRace.Half_Orc:
                 self.speed = '30ft'
                 self.size = 'Medium'
